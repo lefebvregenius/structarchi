@@ -9,31 +9,56 @@ const app = express();
    SECURITY MIDDLEWARE
 ================================= */
 
-// Sécurité headers
+// Headers sécurité
 app.use(helmet({
-  contentSecurityPolicy: false // utile pour vidéos + assets externes
+  contentSecurityPolicy: false
 }));
 
 // CORS sécurisé
+const allowedOrigins = [
+  "https://structarchi.vercel.app",
+  "http://localhost:3000"
+];
+
 app.use(cors({
-  origin: [
-    "https://structarchi.vercel.app",
-    "http://localhost:3000"
-  ],
-  methods: ["GET", "POST"]
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("CORS blocked"));
+    }
+  },
+  methods: ["GET", "POST"],
+  credentials: true
 }));
 
-// JSON limit (anti spam / overload)
+// Limite JSON
 app.use(express.json({ limit: "1mb" }));
 
-// Anti spam / attaque brute force
+// Rate limit (anti attaque)
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 min
-  max: 100, // limite requêtes
-  message: "Too many requests, please try again later."
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  standardHeaders: true,
+  legacyHeaders: false
 });
 
 app.use(limiter);
+
+/* ===============================
+   UTILS VALIDATION
+================================= */
+
+// Nettoyage basique input
+const sanitize = (str) => {
+  return String(str).replace(/[<>]/g, "");
+};
+
+// Email validation
+const isValidEmail = (email) => {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
+};
 
 /* ===============================
    ROUTES API
@@ -44,28 +69,79 @@ app.get("/", (req, res) => {
   res.json({
     status: "StructArchi Backend Online",
     security: "Enabled",
-    version: "2026.1"
+    version: "2026.2",
+    uptime: process.uptime()
   });
 });
 
 // CONTACT FORM
 app.post("/contact", (req, res) => {
-  const { name, email, message } = req.body;
+  try {
+    let { name, email, message } = req.body;
 
-  // validation simple
-  if (!name || !email || !message) {
-    return res.status(400).json({
-      error: "Missing required fields"
+    // validation champs
+    if (!name || !email || !message) {
+      return res.status(400).json({
+        error: "All fields are required"
+      });
+    }
+
+    // nettoyage
+    name = sanitize(name);
+    email = sanitize(email);
+    message = sanitize(message);
+
+    // validation email
+    if (!isValidEmail(email)) {
+      return res.status(400).json({
+        error: "Invalid email format"
+      });
+    }
+
+    // limite longueur (anti spam)
+    if (message.length > 1000) {
+      return res.status(400).json({
+        error: "Message too long"
+      });
+    }
+
+    // log propre (sans données sensibles)
+    console.log("📩 New contact request received");
+
+    // réponse
+    res.json({
+      success: true,
+      message: "Message received successfully"
+    });
+
+  } catch (error) {
+    console.error("❌ Error:", error.message);
+
+    res.status(500).json({
+      error: "Internal server error"
     });
   }
+});
 
-  // log sécurisé
-  console.log("NEW CONTACT REQUEST:");
-  console.log(req.body);
+/* ===============================
+   404 HANDLER
+================================= */
 
-  res.json({
-    success: true,
-    message: "Message received successfully"
+app.use((req, res) => {
+  res.status(404).json({
+    error: "Route not found"
+  });
+});
+
+/* ===============================
+   GLOBAL ERROR HANDLER
+================================= */
+
+app.use((err, req, res, next) => {
+  console.error("🔥 Server error:", err.message);
+
+  res.status(500).json({
+    error: "Something went wrong"
   });
 });
 
