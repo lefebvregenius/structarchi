@@ -16,7 +16,7 @@ body {
   position: fixed;
   width: 100%;
   height: 100%;
-  background: url("../assets/villa.jpg") center/cover no-repeat;
+  background: url("../assets/images/villa.jpg") center/cover no-repeat;
   z-index: -2;
 }
 
