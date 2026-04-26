@@ -1,0 +1,118 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Playfair Display', serif;
+  color: white;
+  background: black;
+  overflow-x: hidden;
+}
+
+/* BACKGROUND */
+.bg {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: url("../assets/villa.jpg") center/cover no-repeat;
+  z-index: -2;
+}
+
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  z-index: -1;
+}
+
+/* NAV */
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+}
+
+nav a {
+  color: white;
+  margin-left: 20px;
+  text-decoration: none;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  margin-top: 120px;
+}
+
+/* TITRE 3D BUGATTI */
+.title-3d {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 80px;
+  color: white;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+
+  text-shadow:
+    0 0 10px red,
+    0 0 20px green,
+    0 0 40px red;
+
+  animation: glow 3s infinite alternate, float 6s ease-in-out infinite;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px red;
+  }
+  to {
+    text-shadow: 0 0 30px green;
+  }
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.subtitle {
+  font-style: italic;
+  margin-top: 20px;
+  opacity: 0.8;
+}
+
+/* CONTENT */
+.content {
+  max-width: 900px;
+  margin: 100px auto;
+  line-height: 1.8;
+  padding: 20px;
+}
+
+.section-title {
+  font-size: 32px;
+  margin-top: 60px;
+  font-weight: bold;
+}
+
+.red {
+  color: #ff2e2e;
+}
+
+.green {
+  color: #00ff9f;
+}
+
+p {
+  margin-top: 20px;
+  font-style: italic;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 40px;
+  opacity: 0.6;
+}
