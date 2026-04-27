@@ -13,6 +13,12 @@ const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHei
 
 const renderer = new THREE.WebGLRenderer({ alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.domElement.style.position = "fixed";
+renderer.domElement.style.top = "0";
+renderer.domElement.style.left = "0";
+renderer.domElement.style.zIndex = "-10";
+renderer.domElement.style.pointerEvents = "none";
+
 document.body.appendChild(renderer.domElement);
 
 // STRUCTURE 3D (cube = bâtiment)
@@ -34,25 +40,7 @@ function animate() {
 }
 
 animate();
-// 🎬 ROTATION VIDÉO STRUCTARCHI
-const videos = [
-  "assets/videos/architecture1.mp4",
-  "assets/videos/architecture2.mp4",
-  "assets/videos/architecture3.mp4",
-  "assets/videos/architecture4.mp4",
-  "assets/videos/architecture5.mp4"
-];
 
-let currentVideo = 0;
-const videoElement = document.getElementById("bg-video");
-
-setInterval(() => {
-  currentVideo = (currentVideo + 1) % videos.length;
-
-  videoElement.src = videos[currentVideo];
-  videoElement.load();
-  videoElement.play();
-}, 10000); // change toutes les 10 secondes
 // FADE IN IMAGES LAZY
 document.querySelectorAll("img").forEach(img => {
   img.addEventListener("load", () => {
@@ -74,21 +62,78 @@ document.querySelectorAll(".mobile-menu a").forEach(link => {
     mobileMenu.classList.remove("active");
   });
 });
-/* LAZY BACKGROUND IMAGE */
-const lazyBg = document.querySelectorAll(".lazy-bg");
+// ===============================
+// GESTION BACKGROUND INTELLIGENTE
+// ===============================
 
-const observer = new IntersectionObserver((entries, obs) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const el = entry.target;
-      const bg = el.getAttribute("data-bg");
+document.addEventListener("DOMContentLoaded", () => {
 
-      el.style.backgroundImage = `url(${bg})`;
-      el.classList.add("loaded");
+  // 📍 CAS 1 — PAGE IMAGE
+  document.addEventListener("DOMContentLoaded", () => {
 
-      obs.unobserve(el);
+  if (document.body.classList.contains("image-page")) {
+
+    const bg = document.querySelector(".lazy-bg");
+
+    if (bg) {
+      const img = bg.getAttribute("data-bg");
+
+      bg.style.backgroundImage = `url(${img})`;
+      bg.classList.add("loaded");
     }
-  });
+  }
+
 });
 
-lazyBg.forEach(el => observer.observe(el));
+  // 📍 CAS 2 — PAGE VIDEO (works.html)
+  if (document.body.classList.contains("video-page")) {
+
+    const videos = [
+     
+      "assets/videos/architecture2.mp4",
+     
+    ];
+
+    let currentVideo = 0;
+    const videoElement = document.getElementById("bg-video");
+
+    if (videoElement) {
+      setInterval(() => {
+        currentVideo = (currentVideo + 1) % videos.length;
+
+        videoElement.src = videos[currentVideo];
+        videoElement.load();
+        videoElement.play();
+      }, 10000);
+    }
+  }
+
+});
+let lastScroll = 0;
+const navbar = document.querySelector(".navbar");
+
+window.addEventListener("scroll", () => {
+  const currentScroll = window.scrollY;
+
+  if (currentScroll <= 0) {
+    navbar.style.top = "0";
+    return;
+  }
+
+  if (currentScroll > lastScroll && currentScroll > 80) {
+    // scroll down
+    navbar.style.top = "-100px";
+  } else {
+    // scroll up
+    navbar.style.top = "0";
+  }
+
+  lastScroll = currentScroll;
+});
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 50) {
+    navbar.classList.add("scrolled");
+  } else {
+    navbar.classList.remove("scrolled");
+  }
+});
