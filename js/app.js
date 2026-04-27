@@ -47,20 +47,26 @@ document.querySelectorAll("img").forEach(img => {
     img.classList.add("loaded");
   });
 });
-const burger = document.getElementById("burger");
-const mobileMenu = document.getElementById("mobileMenu");
+document.addEventListener("DOMContentLoaded", () => {
 
-burger.addEventListener("click", () => {
-  burger.classList.toggle("active");
-  mobileMenu.classList.toggle("active");
-});
+  const burger = document.getElementById("burger");
+  const mobileMenu = document.getElementById("mobileMenu");
 
-/* fermer quand on clique */
-document.querySelectorAll(".mobile-menu a").forEach(link => {
-  link.addEventListener("click", () => {
-    burger.classList.remove("active");
-    mobileMenu.classList.remove("active");
+  if (!burger || !mobileMenu) return;
+
+  burger.addEventListener("click", () => {
+    burger.classList.toggle("active");
+    mobileMenu.classList.toggle("active");
   });
+
+  // fermer au clic lien
+  document.querySelectorAll(".mobile-menu a").forEach(link => {
+    link.addEventListener("click", () => {
+      burger.classList.remove("active");
+      mobileMenu.classList.remove("active");
+    });
+  });
+
 });
 // ===============================
 // GESTION BACKGROUND INTELLIGENTE

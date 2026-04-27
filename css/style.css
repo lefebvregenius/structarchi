@@ -703,46 +703,54 @@ input, textarea, button {
 .burger {
   display: none;
   flex-direction: column;
-  gap: 6px;
+  justify-content: center;
+  gap: 5px;
+  width: 30px;
+  height: 25px;
   cursor: pointer;
-  z-index: 1001;
+  z-index: 10000;
 }
 
 .burger span {
-  width: 28px;
   height: 3px;
+  width: 100%;
   background: white;
-  border-radius: 5px;
-  transition: 0.4s;
+  border-radius: 10px;
+  transition: all 0.4s ease;
 }
 
-/* animation */
+/* animation premium */
 .burger.active span:nth-child(1) {
-  transform: rotate(45deg) translateY(8px);
+  transform: translateY(8px) rotate(45deg);
 }
 .burger.active span:nth-child(2) {
   opacity: 0;
+  transform: scale(0);
 }
 .burger.active span:nth-child(3) {
-  transform: rotate(-45deg) translateY(-8px);
+  transform: translateY(-8px) rotate(-45deg);
 }
 
 /* ================= MOBILE MENU ================= */
 .mobile-menu {
   position: fixed;
-  top: 0;
-  right: -100%;
-  width: 100%;
-  height: 100vh;
-
-  backdrop-filter: blur(30px);
-  background: rgba(0,0,0,0.6);
+  inset: 0;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  transition: 0.6s cubic-bezier(.77,0,.18,1);
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(25px);
+
+  transform: translateX(100%);
+  transition: transform 0.5s cubic-bezier(.77,0,.18,1);
+
+  z-index: 9998;
+}
+
+.mobile-menu.active {
+  transform: translateX(0);
 }
 
 .mobile-menu ul {
@@ -751,20 +759,29 @@ input, textarea, button {
 }
 
 .mobile-menu li {
-  margin: 25px 0;
+  margin: 20px 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 0.4s;
+}
+
+/* animation items */
+.mobile-menu.active li {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .mobile-menu a {
+  font-size: 26px;
   color: white;
-  font-size: 24px;
   text-decoration: none;
   font-family: 'Orbitron', sans-serif;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
+  transition: 0.3s;
 }
 
-/* animation ouverture */
-.mobile-menu.active {
-  right: 0;
+.mobile-menu a:hover {
+  color: #00f0ff;
 }
 
 /* ================= RESPONSIVE ================= */
@@ -829,4 +846,28 @@ input, textarea, button {
 .navbar.scrolled {
   background: rgba(0,0,0,0.6);
   backdrop-filter: blur(25px);
+}
+/* FIX CLICK BLOCK */
+.bg-image,
+canvas {
+  pointer-events: none;
+}
+
+/* NAVBAR au-dessus de tout */
+.navbar {
+  z-index: 9999;
+}
+
+/* MENU au-dessus */
+.mobile-menu {
+  z-index: 9998;
+}
+@media (max-width: 900px) {
+  .nav-links.desktop {
+    display: none;
+  }
+
+  .burger {
+    display: flex;
+  }
 }
