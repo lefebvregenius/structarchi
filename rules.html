@@ -9,24 +9,43 @@
 </head>
 
 <body>
+<div class="bg-image lazy-bg" data-bg="assets/images/luxe2.jpg"></div>
 
-<video autoplay muted loop id="bg-video">
-  <source src="assets/videos/architecture2.mp4" type="video/mp4">
-</video>
+<nav class="navbar">
+  <div class="nav-container">
 
-<div class="overlay"></div>
+    <h1 class="logo">StructArchi</h1>
 
-<nav>
-  <h1 class="logo">StructArchi</h1>
-  <ul>
-    <li><a href="index.html">Accueil</a></li>
-    <li><a href="works.html">Œuvres</a></li>
-    <li><a href="about.html">À propos</a></li>
-    <li><a href="rules.html">Règles</a></li>
-    <li><a href="structures.html">Structures</a></li>
-    <li><a href="contact.html">Fin</a></li>
-    
-  </ul>
+    <!-- MENU DESKTOP -->
+    <ul class="nav-links desktop">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="works.html">Œuvres</a></li>
+      <li><a href="about.html">À propos</a></li>
+      <li><a href="rules.html">Règles</a></li>
+      <li><a href="structures.html">Structures</a></li>
+      <li><a href="contact.html">Fin</a></li>
+    </ul>
+
+    <!-- BURGER (mobile uniquement) -->
+    <div class="burger" id="burger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+  </div>
+
+  <!-- MENU MOBILE (FULLSCREEN) -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="works.html">Œuvres</a></li>
+      <li><a href="about.html">À propos</a></li>
+      <li><a href="rules.html">Règles</a></li>
+      <li><a href="structures.html">Structures</a></li>
+      <li><a href="contact.html">Fin</a></li>
+    </ul>
+  </div>
 </nav>
 
 <section class="rules">

@@ -647,3 +647,174 @@ input, textarea, button {
   transform: scale(1.05);
   box-shadow: 0 0 20px rgba(0,240,255,0.4);
 }
+/* ================= NAVBAR GLOBAL ================= */
+.navbar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 999;
+  backdrop-filter: blur(20px);
+  background: rgba(0,0,0,0.25);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+}
+
+.logo {
+  color: white;
+  font-family: 'Playfair Display', serif;
+}
+
+/* ================= DESKTOP MENU ================= */
+.nav-links.desktop {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+
+.nav-links.desktop a {
+  color: white;
+  text-decoration: none;
+  font-family: 'Orbitron', sans-serif;
+  position: relative;
+}
+
+.nav-links.desktop a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background: white;
+  bottom: -5px;
+  left: 0;
+  transition: 0.4s;
+}
+
+.nav-links.desktop a:hover::after {
+  width: 100%;
+}
+
+/* ================= BURGER ================= */
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.burger span {
+  width: 28px;
+  height: 3px;
+  background: white;
+  border-radius: 5px;
+  transition: 0.4s;
+}
+
+/* animation */
+.burger.active span:nth-child(1) {
+  transform: rotate(45deg) translateY(8px);
+}
+.burger.active span:nth-child(2) {
+  opacity: 0;
+}
+.burger.active span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-8px);
+}
+
+/* ================= MOBILE MENU ================= */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  height: 100vh;
+
+  backdrop-filter: blur(30px);
+  background: rgba(0,0,0,0.6);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: 0.6s cubic-bezier(.77,0,.18,1);
+}
+
+.mobile-menu ul {
+  list-style: none;
+  text-align: center;
+}
+
+.mobile-menu li {
+  margin: 25px 0;
+}
+
+.mobile-menu a {
+  color: white;
+  font-size: 24px;
+  text-decoration: none;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 2px;
+}
+
+/* animation ouverture */
+.mobile-menu.active {
+  right: 0;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 900px) {
+
+  .nav-links.desktop {
+    display: none;
+  }
+
+  .burger {
+    display: flex;
+  }
+}
+/* BACKGROUND IMAGE PREMIUM */
+.bg-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  filter: brightness(0.6);
+  transition: opacity 1s ease;
+  opacity: 0;
+}
+
+/* effet overlay premium */
+.bg-image::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(2px);
+  background: rgba(0,0,0,0.3);
+}
+
+/* quand chargé */
+.bg-image.loaded {
+  opacity: 1;
+}
+.bg-image {
+  animation: zoomBg 20s infinite alternate ease-in-out;
+}
+
+@keyframes zoomBg {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
+}

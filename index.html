@@ -43,17 +43,35 @@
   </p>
 
 </section>
- <!-- VIDEO BACKGROUND -->
-  <video autoplay muted loop id="bg-video">
-    <source src="assets/videos/architecture4.mp4" type="video/mp4">
-  </video>
-
-  <!-- OVERLAY -->
-  <div class="overlay"></div>
+ <div class="bg-image lazy-bg" data-bg="assets/images/villaluxe1.jpg"></div>
 
   <!-- NAV -->
-  <nav>
+  <nav class="navbar">
+  <div class="nav-container">
+
     <h1 class="logo">StructArchi</h1>
+
+    <!-- MENU DESKTOP -->
+    <ul class="nav-links desktop">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="works.html">Œuvres</a></li>
+      <li><a href="about.html">À propos</a></li>
+      <li><a href="rules.html">Règles</a></li>
+      <li><a href="structures.html">Structures</a></li>
+      <li><a href="contact.html">Fin</a></li>
+    </ul>
+
+    <!-- BURGER (mobile uniquement) -->
+    <div class="burger" id="burger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+  </div>
+
+  <!-- MENU MOBILE (FULLSCREEN) -->
+  <div class="mobile-menu" id="mobileMenu">
     <ul>
       <li><a href="index.html">Accueil</a></li>
       <li><a href="works.html">Œuvres</a></li>
@@ -62,7 +80,8 @@
       <li><a href="structures.html">Structures</a></li>
       <li><a href="contact.html">Fin</a></li>
     </ul>
-  </nav>
+  </div>
+</nav>
 
   <!-- HERO -->
   <section class="hero">

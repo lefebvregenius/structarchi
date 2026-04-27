@@ -59,3 +59,36 @@ document.querySelectorAll("img").forEach(img => {
     img.classList.add("loaded");
   });
 });
+const burger = document.getElementById("burger");
+const mobileMenu = document.getElementById("mobileMenu");
+
+burger.addEventListener("click", () => {
+  burger.classList.toggle("active");
+  mobileMenu.classList.toggle("active");
+});
+
+/* fermer quand on clique */
+document.querySelectorAll(".mobile-menu a").forEach(link => {
+  link.addEventListener("click", () => {
+    burger.classList.remove("active");
+    mobileMenu.classList.remove("active");
+  });
+});
+/* LAZY BACKGROUND IMAGE */
+const lazyBg = document.querySelectorAll(".lazy-bg");
+
+const observer = new IntersectionObserver((entries, obs) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const bg = el.getAttribute("data-bg");
+
+      el.style.backgroundImage = `url(${bg})`;
+      el.classList.add("loaded");
+
+      obs.unobserve(el);
+    }
+  });
+});
+
+lazyBg.forEach(el => observer.observe(el));
