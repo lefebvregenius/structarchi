@@ -1,0 +1,156 @@
+/* ===============================
+   POPUP PREMIUM
+================================= */
+
+.popup {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(12px);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s;
+
+  z-index: 99999;
+}
+
+.popup.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ===============================
+   CONTENU POPUP
+================================= */
+.popup-content {
+  max-width: 700px;
+  padding: 40px;
+
+  background: rgba(20,20,20,0.85);
+  border-radius: 20px;
+
+  border: 1px solid rgba(0,255,255,0.2);
+
+  backdrop-filter: blur(20px);
+
+  transform: scale(0.8);
+  opacity: 0;
+
+  transition: 0.4s ease;
+
+  box-shadow:
+    0 0 40px rgba(0,255,255,0.2),
+    0 0 80px rgba(0,255,255,0.1);
+}
+
+.popup.active .popup-content {
+  transform: scale(1);
+  opacity: 1;
+}
+.popup-content {
+  max-height: 80vh;   /* IMPORTANT : limite la hauteur */
+  overflow-y: auto;   /* ACTIVE le scroll interne */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,255,255,0.5) transparent;
+}
+
+/* Chrome / Edge scroll premium */
+.popup-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.popup-content::-webkit-scrollbar-thumb {
+  background: rgba(0,255,255,0.4);
+  border-radius: 10px;
+}
+
+.popup-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+/* ===============================
+   TEXTE STYLE PLUME
+================================= */
+.popup-content p {
+  font-family: "Georgia", serif;
+  font-style: italic;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.9);
+}
+
+/* TITRE PREMIUM */
+.popup-content h2 {
+  margin-bottom: 20px;
+  font-size: 28px;
+
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+/* BOUTON FERMER */
+.close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 30px;
+  cursor: pointer;
+  color: white;
+  transition: 0.3s;
+}
+
+.close:hover {
+  color: red;
+}
+
+/* ===============================
+   ANIMATION CARD HOVER PREMIUM
+================================= */
+.card {
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(120deg, transparent, rgba(0,255,255,0.2), transparent);
+  opacity: 0;
+  transition: 0.4s;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card:hover {
+  transform: translateY(-5px) scale(1.03);
+}
+.popup-image {
+  width: 100%;
+  margin-top: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 40px rgba(0,0,0,0.6);
+  animation: fadeIn 1s ease;
+}
+
+@keyframes popupFade {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+html {
+  scroll-behavior: smooth;
+}

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Œuvres — StructArchi</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/works.css">
 </head>
 
 <body class="video-page">
@@ -55,39 +56,39 @@
 
   <h2 class="glow-text">ŒUVRES</h2>
 
-  <div class="grid">
+ <div class="grid">
 
-    <div class="card">
-      <h3>Résidence Horizon</h3>
-      <p>
-        Une structure moderne basée sur des lignes minimalistes et une optimisation
-        de la lumière naturelle.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>Tour Nexus</h3>
-      <p>
-        Un projet vertical combinant puissance structurelle et design futuriste.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>Villa Éclipse</h3>
-      <p>
-        Une architecture luxueuse intégrée dans son environnement naturel,
-        avec une approche immersive.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>Complexe Quantum</h3>
-      <p>
-        Un espace multifonctionnel conçu pour l’efficacité, la fluidité et la modernité.
-      </p>
-    </div>
-
+  <div class="card" data-project="horizon">
+    <h3>Résidence Horizon</h3>
+    <p>
+      Une structure moderne basée sur des lignes minimalistes et une optimisation
+      de la lumière naturelle.
+    </p>
   </div>
+
+  <div class="card" data-project="nexus">
+    <h3>Tour Nexus</h3>
+    <p>
+      Un projet vertical combinant puissance structurelle et design futuriste.
+    </p>
+  </div>
+
+  <div class="card" data-project="eclipse">
+    <h3>Villa Éclipse</h3>
+    <p>
+      Une architecture luxueuse intégrée dans son environnement naturel,
+      avec une approche immersive.
+    </p>
+  </div>
+
+  <div class="card" data-project="quantum">
+    <h3>Complexe Quantum</h3>
+    <p>
+      Un espace multifonctionnel conçu pour l’efficacité, la fluidité et la modernité.
+    </p>
+  </div>
+
+</div>
 <section class="services">
 
   <h2 class="glow-text">SERVICES</h2>
@@ -193,6 +194,14 @@
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 <script src="js/app.js"></script>
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <span class="close">&times;</span>
+    <h2 id="popup-title"></h2>
+    <p id="popup-text"></p>
+  </div>
+</div>
 
+<script src="js/works.js"></script>
 </body>
 </html>
