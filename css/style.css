@@ -871,3 +871,14 @@ canvas {
     display: flex;
   }
 }
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+}
+
+.nav-links.desktop {
+  margin-left: 40px;
+  gap: 40px;
+}

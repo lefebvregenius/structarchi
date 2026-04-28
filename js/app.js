@@ -72,18 +72,17 @@ document.addEventListener("DOMContentLoaded", () => {
 // GESTION BACKGROUND INTELLIGENTE
 // ===============================
 
-document.addEventListener("DOMContentLoaded", () => {
 
   // 📍 CAS 1 — PAGE IMAGE
-  document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
 
+  // BACKGROUND IMAGE
   if (document.body.classList.contains("image-page")) {
 
     const bg = document.querySelector(".lazy-bg");
 
     if (bg) {
       const img = bg.getAttribute("data-bg");
-
       bg.style.backgroundImage = `url(${img})`;
       bg.classList.add("loaded");
     }
@@ -114,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-});
+
 let lastScroll = 0;
 const navbar = document.querySelector(".navbar");
 
@@ -143,3 +142,33 @@ window.addEventListener("scroll", () => {
     navbar.classList.remove("scrolled");
   }
 });
+if (typeof THREE !== "undefined") {
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+
+  const renderer = new THREE.WebGLRenderer({ alpha: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.domElement.style.position = "fixed";
+  renderer.domElement.style.zIndex = "-10";
+  renderer.domElement.style.pointerEvents = "none";
+
+  document.body.appendChild(renderer.domElement);
+
+  const geometry = new THREE.BoxGeometry();
+  const material = new THREE.MeshBasicMaterial({ color: 0x00f0ff, wireframe: true });
+
+  const cube = new THREE.Mesh(geometry, material);
+  scene.add(cube);
+
+  camera.position.z = 3;
+
+  function animate() {
+    requestAnimationFrame(animate);
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
+    renderer.render(scene, camera);
+  }
+
+  animate();
+}
