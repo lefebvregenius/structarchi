@@ -879,6 +879,132 @@ canvas {
 }
 
 .nav-links.desktop {
-  margin-left: 40px;
+  margin-left: 60px;
   gap: 40px;
+}
+/* ===============================
+   BACKGROUND PREMIUM FIX GLOBAL
+================================= */
+.bg-image {
+  position: fixed;
+  inset: 0;
+  z-index: -5;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  filter: brightness(0.55) contrast(1.2);
+  opacity: 0;
+
+  transition: opacity 1.2s ease;
+}
+
+/* overlay luxe */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: -4;
+
+  backdrop-filter: blur(8px);
+  background: rgba(0,0,0,0.25);
+}
+
+/* fade in */
+.bg-image.loaded {
+  opacity: 1;
+}
+
+/* zoom cinematic */
+.bg-image {
+  animation: zoomBg 25s infinite alternate ease-in-out;
+}
+
+@keyframes zoomBg {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+.navbar {
+  transition: all 0.4s ease;
+}
+
+.navbar.scrolled {
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(25px);
+}
+/* ===============================
+   NAV HOVER PREMIUM (ligne rouge animée)
+================================= */
+
+.nav-links a {
+  position: relative;
+  padding-bottom: 5px;
+}
+
+/* ligne invisible */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+
+  background: linear-gradient(90deg, red, #ff4d4d, transparent);
+
+  transition: width 0.4s ease;
+}
+
+/* effet au survol */
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* glow subtil */
+.nav-links a:hover {
+  color: #ff4d4d;
+  text-shadow: 0 0 10px rgba(255,0,0,0.6);
+}
+
+/* ===============================
+   CARDS PREMIUM HOVER
+================================= */
+.card {
+  transition: all 0.4s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.02);
+
+  box-shadow:
+    0 0 20px rgba(255,0,0,0.3),
+    0 0 60px rgba(0,240,255,0.2);
+}
+
+/* ===============================
+   NAVBAR LINE EFFECT (scroll)
+================================= */
+.navbar::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  width: 100%;
+
+  background: linear-gradient(90deg, transparent, red, transparent);
+  opacity: 0.3;
+}
+
+/* ===============================
+   VIDEO PREMIUM EFFECT
+================================= */
+#bg-video {
+  filter: brightness(0.3) contrast(1.2) saturate(1.1);
+  transition: filter 1s ease;
+}
+
+/* petit boost quand scroll */
+.navbar.scrolled ~ #bg-video {
+  filter: brightness(0.25);
 }
