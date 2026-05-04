@@ -4,7 +4,13 @@
 
 .popup {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+
+  overflow-y: auto; /* 🔥 FIX MOBILE */
+
 
   display: flex;
   justify-content: center;
@@ -72,6 +78,9 @@
 
 .popup-content::-webkit-scrollbar-track {
   background: transparent;
+}
+.popup-content {
+  -webkit-overflow-scrolling: touch;
 }
 /* ===============================
    TEXTE STYLE PLUME
@@ -153,4 +162,14 @@
 }
 html {
   scroll-behavior: smooth;
+}
+#bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  pointer-events: none; /* 🔥 évite bug scroll */
 }
